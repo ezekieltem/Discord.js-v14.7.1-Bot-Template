@@ -1,13 +1,11 @@
 const { Client, GatewayIntentBits } = require("discord.js")
 const fs = require('node:fs')
 
-
 const token = require('./jsons/sensitive.json').token || process.env.token
 
 const client = new Client({
     intents: []
 })
-
 
 client.on("ready", (readyClient) => {
     console.log("Logged in...")

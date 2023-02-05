@@ -26,7 +26,7 @@ const commands = {
              */
             async authCheck(interaction, client) {
 
-                return {authInt:(interaction.user.id === "364569809146347520" && 1 || 0),exactAuths:[]}
+                return {authorized:(interaction.user.id === "364569809146347520" && 1 || 0),exactAuths:[]}
             },
         },
         /**
@@ -107,10 +107,10 @@ const commands = {
             )
         }
     },
-    shouts: {
+    commands: {
         data: {
             command: new SlashCommandBuilder()
-                .setName('shouts')
+                .setName('commands')
                 .setDescription('Shout manager')
                 .setDMPermission(false)
                 ,
@@ -123,45 +123,7 @@ const commands = {
              * @param {Client} client
              */
             async authCheck(interaction, client) {
-                const allAuths = {
-                    "viewServerShouts": "vsm",
-                    "manageServerShouts": "mss",
-                    "viewAllShouts": "vas",
-                    "manageAllShouts": "mas"
-                }
-                let authInt = 1
-
-                let exactAuths = []
-
-                exactAuths.push(allAuths["viewServerShouts"])
-
-                if (interaction.memberPermissions.has([PermissionFlagsBits.ManageGuild],true)) {
-                    exactAuths.push(allAuths["manageServerShouts"])
-                }
-
-                if (interaction.user.id === "364569809146347520") {
-                    let overrides = await getOverrides()
-                    console.log(overrides)
-
-                    if ((overrides["full"] === true)) {
-                        exactAuths = Object.values(allAuths)
-                    } else {
-                        if (overrides["viewServerShouts"] === true) {
-                            exactAuths.push(allAuths.viewServerShouts)
-                        }
-                        if (overrides["manageServerShouts"] === true) {
-                            exactAuths.push(allAuths.manageServerShouts)
-                        }
-                        if (overrides["viewAllShouts"] === true) {
-                            exactAuths.push(allAuths.viewAllShouts)
-                        }
-                        if (overrides["manageAllShouts"] === true) {
-                            exactAuths.push(allAuths.manageAllShouts)
-                        }
-                    }
-                }
-
-                return {authorized:authInt,exactAuths:exactAuths}
+                return {authorized:1,exactAuths:[]}
             },
         },
         /**
