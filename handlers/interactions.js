@@ -10,23 +10,17 @@ module.exports = async (client, authorized) => {
 
     const commands = [];
     const commandData = require("../interactions/slash.js")
-    // Grab all the command files from the commands directory you created earlier
-
-    // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
 
     for (const [key, command] of Object.entries(commandData)) {
         commands.push(command.data.command.toJSON());
     }
 
-    // Construct and prepare an instance of the REST module
     const rest = new REST({ version: '10' }).setToken(token);
 
-    // and deploy your commands!
     (async () => {
         try {
             console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
-            // The put method is used to fully refresh all commands in the guild with the current set
             const data = await rest.put(
                 Routes.applicationCommands(client.application.id),
                 { body: commands },
@@ -380,7 +374,6 @@ module.exports = async (client, authorized) => {
                 }
             })
         } catch (error) {
-            // And of course, make sure you catch and log any errors!
             console.log("Warning! Failed to load commands! Exiting process!")
             console.error(error);
             process.exit()
