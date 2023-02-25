@@ -1,4 +1,4 @@
-const { REST, Routes, Events, Client, InteractionType, EmbedBuilder, Embed, Options, ApplicationCommandOptionType } = require('discord.js');
+const { REST, Routes, Events, Client, InteractionType, EmbedBuilder, Embed, Options, ApplicationCommandOptionType, SlashCommandBuilder } = require('discord.js');
 /**
  * 
  * @param {Client} client 
@@ -252,78 +252,97 @@ module.exports = async (client) => {
 
     /**
      * 
-     * @param {[String]} commands 
+     * @param {[String]} commands Filters command list to set commands
+     * @param {((builder: commandInfo) => commandInfo)} filterData Filter the returned data.
      * 
      * @returns {[any]}
      */
 
-    const getCommandInfos = async function (commandNames) {
+    const getCommandInfos = async function (commandNames, filterData) {
+        if (typeof (commandNames) !== "object") throw new TypeError(`global.getCommandInfos() argument #1 expected to be an "object", but recieved "${typeof (commandNames)}"`)
         let commands = require('../interactions/slash.js')
-        let response = {}
-        commandNames.forEach((commandName, index) => {
-            if (typeof (commandName) !== "string") throw new TypeError(`global.getCommandInfo() argument #1 expected "string", recieved "${typeof (commandName)}"`)
+        let response = {
+            template: new commandInfo().toJSON()
+        }
+        for (const [index, command] of Object.entries(commands)) {
+            let commandData = new commandInfo()
+                .setName(command.data.command.name)
+                .setDescription(command.data.command.description)
 
+            command.data.command.options.forEach((value, index) => {
+                const data = value.toJSON()
 
-            if (commands[commandName]) {
-                const command = commands.template
+                let argumentData = new argumentInfo()
+                    .setName(data.name || "No argument name???")
+                    .setDescription(data.description || "No description")
 
-                let commandData = new commandInfo()
-                    .setName(command.data.command.name)
-                    .setDescription(command.data.command.description)
-
-                command.data.command.options.forEach((value, index) => {
-                    const data = value.toJSON()
-
-                    let argumentData = new argumentInfo()
-                        .setName(data.name || "No argument name???")
-                        .setDescription(data.description || "No description")
-
-                    if (data.type === ApplicationCommandOptionType.String) {
-                        if (data.autocomplete === false) {
-                            argumentData.setType("String")
-                        } else {
-                            argumentData.setType("String/AutoComplete")
-                        }
-                    } else if (data.type === ApplicationCommandOptionType.Attachment) {
-                        argumentData.setType("Attachment")
-                    } else if (data.type === ApplicationCommandOptionType.Boolean) {
-                        argumentData.setType("Boolean")
-                    } else if (data.type === ApplicationCommandOptionType.Channel) {
-                        argumentData.setType("Channel")
-                    } else if (data.type === ApplicationCommandOptionType.Integer) {
-                        argumentData.setType("Integer")
-                    } else if (data.type === ApplicationCommandOptionType.Mentionable) {
-                        argumentData.setType("Mentionable")
-                    } else if (data.type === ApplicationCommandOptionType.Number) {
-                        argumentData.setType("Number")
-                    } else if (data.type === ApplicationCommandOptionType.Role) {
-                        argumentData.setType("Role")
-                    } else if (data.type === ApplicationCommandOptionType.Subcommand) {
-                        argumentData.setType("SubCommand")
-                    } else if (data.type === ApplicationCommandOptionType.SubcommandGroup) {
-                        argumentData.setType("SubCommandGroup")
-                    } else if (data.type === ApplicationCommandOptionType.User) {
-                        argumentData.setType("User")
+                if (data.type === ApplicationCommandOptionType.String) {
+                    if (data.autocomplete === false) {
+                        argumentData.setType("String")
+                    } else {
+                        argumentData.setType("String/AutoComplete")
                     }
-
-                    commandData.addArguments([argumentData])
-                })
-
-                response[commandName] = {
-                    code: 200,
-                    message: "Successfully returned commandData",
-                    data: commandData.toJSON()
+                } else if (data.type === ApplicationCommandOptionType.Attachment) {
+                    argumentData.setType("Attachment")
+                } else if (data.type === ApplicationCommandOptionType.Boolean) {
+                    argumentData.setType("Boolean")
+                } else if (data.type === ApplicationCommandOptionType.Channel) {
+                    argumentData.setType("Channel")
+                } else if (data.type === ApplicationCommandOptionType.Integer) {
+                    argumentData.setType("Integer")
+                } else if (data.type === ApplicationCommandOptionType.Mentionable) {
+                    argumentData.setType("Mentionable")
+                } else if (data.type === ApplicationCommandOptionType.Number) {
+                    argumentData.setType("Number")
+                } else if (data.type === ApplicationCommandOptionType.Role) {
+                    argumentData.setType("Role")
+                } else if (data.type === ApplicationCommandOptionType.Subcommand) {
+                    argumentData.setType("SubCommand")
+                } else if (data.type === ApplicationCommandOptionType.SubcommandGroup) {
+                    argumentData.setType("SubCommandGroup")
+                } else if (data.type === ApplicationCommandOptionType.User) {
+                    argumentData.setType("User")
                 }
-            } else {
-                response[commandName] = {
-                    code: 404,
-                    message: `No command exists with the name "${commandName}"`
-                }
-            }
-        })
 
+                commandData.addArguments([argumentData])
+            })
+
+            response[command.data.command.name] = commandData.toJSON()
+        }
         return response
     }
 
     global.getCommandInfos = getCommandInfos
+
+    /**
+     * 
+     * @param {({commandInfo...})} infos 
+     */
+
+    const pageCommandInfos = async function (infos) {
+
+        let pages = []
+
+        Object.entries(infos).forEach((value, index) => {
+            let page = Math.floor(index / 25)
+            console.log(page)
+            console.log(value)
+            if (pages[page]) {
+                pages[page].push({
+                    value: value[1].description,
+                    name: value[1].name
+                })
+            } else {
+                pages[page] = []
+                pages[page].push({
+                    value: value[1].description,
+                    name: value[1].name
+                })
+            }
+        })
+
+        return pages
+    }
+    
+    global.pageCommandInfos = pageCommandInfos
 }

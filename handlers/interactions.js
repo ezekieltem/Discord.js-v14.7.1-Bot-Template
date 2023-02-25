@@ -1,5 +1,4 @@
 const { REST, Routes, Events, Client, InteractionType, ComponentType, Locale } = require('discord.js');
-const { auth } = require('firebase-admin');
 const fs = require('node:fs');
 const token = require('../jsons/sensitive.json').token || process.env.token
 /**
