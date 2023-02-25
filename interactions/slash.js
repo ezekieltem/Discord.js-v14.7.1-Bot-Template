@@ -190,7 +190,7 @@ const commands = {
                     content: `Command ran into no errors`,
                     embeds: [new EmbedBuilder().setTitle("Commands").setFields(pages[0])],
                     components: [ActionRow, ActionRow2],
-                    ephemeral: true
+                    ephemeral: true,
                 })
             }
         },
