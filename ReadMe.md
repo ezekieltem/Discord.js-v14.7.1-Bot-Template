@@ -16,6 +16,7 @@ The JSON should be added manually, the file contents should look something like:
     "token": ""
 }
 ```
+and then filled in accordingly.
 
 # Template currently includes:
 * Interaction Handler
