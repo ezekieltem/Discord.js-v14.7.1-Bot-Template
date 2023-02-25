@@ -195,7 +195,7 @@ module.exports = async (client) => {
         let commands = require('../interactions/slash.js')
 
         if (commands[commandName]) {
-            const command = commands.template
+            const command = commands[commandName]
 
             let commandData = new commandInfo()
                 .setName(command.data.command.name)

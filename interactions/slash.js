@@ -109,7 +109,7 @@ const commands = {
                 .setDMPermission(false)
                 .addStringOption(option =>
                     option.setName('command')
-                        .setDescription("Returns a specific command, or all commands that start with any set of character (*) ex: *t")
+                        .setDescription("Returns all commands, or exact command details for a specific command.")
                         .setAutocomplete(true)
                         .setRequired(false)
                 )
@@ -205,19 +205,448 @@ const commands = {
             let response = await getCommandInfos([])
             let interactionResponse = []
             let names = Object.values(response).map(option => option.name).filter(option => option.startsWith(currentText))
+            let i = 0
             for (const name of names) {
-                let thisReponse = {
-                    "name": name,
-                    "nameLocalizations": Locale.EnglishUS,
-                    "value": `${name}`
+                if (i < 25) {
+                    let thisReponse = {
+                        "name": name,
+                        "nameLocalizations": Locale.EnglishUS,
+                        "value": `${name}`
+                    }
+                    interactionResponse.push(thisReponse)
+                    i++
                 }
-                interactionResponse.push(thisReponse)
             }
             interaction.respond(
                 interactionResponse
             )
         }
-    }
+    },
+    template2: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template2')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template3: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template3')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template4: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template4')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template5: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template5')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template6: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template6')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template7: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template7')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template8: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template8')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template9: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template9')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template10: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template10')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template11: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template11')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template12: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template12')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template13: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template13')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template14: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template14')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template15: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template15')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template16: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template16')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template17: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template18')
+                .setDescription('This is a template18. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template18: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template19')
+                .setDescription('This is a template19. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template20: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template20')
+                .setDescription('This is a template20. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template21: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template21')
+                .setDescription('This is a template21. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template22: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template22')
+                .setDescription('This is a template22. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template23: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template23')
+                .setDescription('This is a template23. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template24: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template24')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template25: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template25')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template26: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template26')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
+    template27: {
+        data: {
+            command: new SlashCommandBuilder()
+                .setName('template27')
+                .setDescription('This is a template. *duh*')
+                .addStringOption(option =>
+                    option.setName("string")
+                        .setAutocomplete(true)
+                        .setRequired(false)
+                        .setDescription("This is an option description")
+                )
+            ,
+            handler: {
+                load: false,
+            },
+        },
+    },
 }
 
 module.exports = commands

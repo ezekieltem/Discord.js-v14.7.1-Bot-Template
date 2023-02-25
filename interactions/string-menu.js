@@ -14,7 +14,7 @@ const menus = {
          * @param {Client} client
          */
         async authCheck(interaction, client) {
-            return (interaction.user.id === "364569809146347520")
+            return { authorized: 1, exactAuths: [] }
         },
         /**
          * 
@@ -25,6 +25,33 @@ const menus = {
             let selected = interaction.values[0]
             interaction.update({
                 content: `You used the string-menu and selected "${selected}" :D`,
+            })
+        }
+    },
+    "cmd": {
+        "subMenus": {
+        },
+        /**
+         * 
+         * @param {StringSelectMenuInteraction} interaction 
+         * @param {Client} client
+         */
+        async authCheck(interaction, client) {
+            return { authorized: 1, exactAuths: [] }
+        },
+        /**
+         * 
+         * @param {StringSelectMenuInteraction} interaction 
+         * @param {Client} client 
+         */
+        async onSelect(interaction, client) {
+            let selected = interaction.values[0]
+            let commandData = await getCommandInfo(selected)
+            let embed = await buildCommandInfoEmbed(commandData)
+
+            interaction.reply({
+                embeds: [embed],
+                ephemeral: true
             })
         }
     }
