@@ -6,7 +6,8 @@ Please keep in mind that this template is still undergoing development, every re
 
 But please keep in mind that I plan on updating this regularly as I learn more [Discord.js](https://discord.js.org/#/) features.
 
-## Template currently includes:
+
+# Template currently includes:
 * Interaction Handler
   1. (/) Commands
       * Template command
