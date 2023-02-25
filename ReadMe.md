@@ -36,7 +36,10 @@ and then filled in accordingly.
 
 And thats it for now, but I always plan on adding more until a new stable version of [Discord.js](https://discord.js.org/#/) is released and I have completed the template for that.
 
+# Links
 
 * ### [Discord.js Website](https://discord.js.org/#/)
 * ### [Discord.js Documentation](https://discord.js.org/#/docs/discord.js/14.7.1/general/welcome)
 * ### [Discord.js Discord](https://discord.com/invite/djs)
+
+* ### [My Development Server](https://discord.gg/p7wcaTBFFu)
