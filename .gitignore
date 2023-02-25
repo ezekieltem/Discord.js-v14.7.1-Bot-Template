@@ -1,2 +1,10 @@
 /node_modules
 /jsons/sensitive.json
+
+
+
+
+// Everything past here is files not related to the actual template, these are mearly files on my local system that dont need publishing to the main repo
+
+/handlers/auditlog.js
+/commands
