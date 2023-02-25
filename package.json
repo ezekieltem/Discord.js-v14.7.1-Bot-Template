@@ -1,14 +1,14 @@
 {
-  "name": "3--rblx-project",
+  "name": "discord.js_v14.7.1_bot_template",
   "version": "1.0.0",
-  "description": "",
+  "description": "A template bot for Discord.js v14.7.1",
   "main": "index.js",
   "scripts": {
     "run": "node index.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "ezekieltem",
+  "license": "MIT",
   "dependencies": {
     "discord.js": "^14.7.1"
   }
