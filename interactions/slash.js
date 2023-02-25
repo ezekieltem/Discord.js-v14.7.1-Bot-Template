@@ -134,31 +134,43 @@ const commands = {
          * @param {[]} exactAuths 
          */
         async command(interaction, client, authLevel, exactAuths) {
-            const returned = await getCommandInfos([])
-            let pages = await pageCommandInfos(returned)
-            let ActionRow = new ActionRowBuilder()
-            let LeftArrow = new ButtonBuilder()
-                .setLabel("⬅️")
-                .setCustomId("btn/cmd/left")
-                .setDisabled(true)
-                .setStyle(ButtonStyle.Primary)
-            let Number = new ButtonBuilder()
-                .setLabel("1")
-                .setCustomId("btn/cmd/number")
-                .setDisabled(true)
-                .setStyle(ButtonStyle.Secondary)
-            let RightArrow = new ButtonBuilder()
-                .setLabel("➡️")
-                .setCustomId("btn/cmd/right") 
-                .setDisabled((pages.length <= 1))
-                .setStyle(ButtonStyle.Primary)
-            ActionRow.setComponents([LeftArrow,Number,RightArrow])
-            interaction.reply({
-                content: `Command ran into no errors`,
-                embeds: [new EmbedBuilder().setTitle("Commands").setFields(pages[0])],
-                components: [ActionRow],
-                ephemeral: true
-            })
+            let options = interaction.options
+            let specificCommand = options.getString("command")
+            if (specificCommand) {
+                let commandData = await getCommandInfo(specificCommand)
+
+                let embed = await buildCommandInfoEmbed(commandData)
+
+                interaction.reply({
+                    embeds: [embed]
+                })
+            } else {
+                const returned = await getCommandInfos([])
+                let pages = await pageCommandInfos(returned)
+                let ActionRow = new ActionRowBuilder()
+                let LeftArrow = new ButtonBuilder()
+                    .setLabel("⬅️")
+                    .setCustomId("btn/cmd/left")
+                    .setDisabled(true)
+                    .setStyle(ButtonStyle.Primary)
+                let Number = new ButtonBuilder()
+                    .setLabel("1")
+                    .setCustomId("btn/cmd/number")
+                    .setDisabled(true)
+                    .setStyle(ButtonStyle.Secondary)
+                let RightArrow = new ButtonBuilder()
+                    .setLabel("➡️")
+                    .setCustomId("btn/cmd/right")
+                    .setDisabled((pages.length <= 1))
+                    .setStyle(ButtonStyle.Primary)
+                ActionRow.setComponents([LeftArrow, Number, RightArrow])
+                interaction.reply({
+                    content: `Command ran into no errors`,
+                    embeds: [new EmbedBuilder().setTitle("Commands").setFields(pages[0])],
+                    components: [ActionRow],
+                    ephemeral: true
+                })
+            }
         },
         /**
          * 
@@ -167,45 +179,21 @@ const commands = {
          */
         async autocomplete(interaction, client) {
             let currentText = interaction.options.getFocused()
-            if (currentText.startsWith("*")) {
-                let response = await getCommandInfos([])
-                let characters = ("abcdefghijklmnopqrstuvwxyz").split("")
-                let interactionResponse = []
-                characters.forEach((value, index) => {
-                    console.log(currentText + value)
-                    interactionResponse.push({
-                        name: currentText + value,
-                        nameLocalizations: Locale.EnglishUS,
-                        value: currentText + value
-                    })
-                })
-                if (interactionResponse.length > 25) {
-                    for (const i of interactionResponse) {
-                        if (interactionResponse.length === 25) {
-                        } else {
-                            interactionResponse.pop()
-                        }
-                    }
+
+            let response = await getCommandInfos([])
+            let interactionResponse = []
+            let names = Object.values(response).map(option => option.name).filter(option => option.startsWith(currentText))
+            for (const name of names) {
+                let thisReponse = {
+                    "name": name,
+                    "nameLocalizations": Locale.EnglishUS,
+                    "value": `${name}`
                 }
-                interaction.respond(
-                    interactionResponse
-                )
-            } else {
-                let response = await getCommandInfos([])
-                let interactionResponse = []
-                let names = Object.values(response).map(option => option.name).filter(option => option.startsWith(currentText))
-                for (const name of names) {
-                    let thisReponse = {
-                        "name": name,
-                        "nameLocalizations": Locale.EnglishUS,
-                        "value": `${name}`
-                    }
-                    interactionResponse.push(thisReponse)
-                }
-                interaction.respond(
-                    interactionResponse
-                )
+                interactionResponse.push(thisReponse)
             }
+            interaction.respond(
+                interactionResponse
+            )
         }
     }
 }

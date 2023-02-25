@@ -120,7 +120,7 @@ module.exports = async (client) => {
 
         /**
          * 
-         * @param {[<argumentInfo>]} newArguments 
+         * @param {[argumentInfo]} newArguments 
          * @returns {commandInfo}
          */
         addArguments(newArguments) {
@@ -155,6 +155,10 @@ module.exports = async (client) => {
         }
     }
 
+    global.commandInfo = commandInfo
+
+    global.argumentInfo = argumentInfo
+
 
 
     // VARIABLES
@@ -179,7 +183,7 @@ module.exports = async (client) => {
     }
 
     // FUNCTIONS
-
+    
     /**
      * 
      * @param {String} commandName 
@@ -345,4 +349,35 @@ module.exports = async (client) => {
     }
     
     global.pageCommandInfos = pageCommandInfos
+
+    /**
+     * 
+     * @param {commandInfo.toJSON} info 
+     */
+
+    const buildCommandInfoEmbed = async function (info) {
+        let embed = new EmbedBuilder()
+            .setTitle(`Commands/${info.data.name}`)
+            .setDescription(`${info.data.description}`)
+
+
+        /**
+         * 
+         * @param {argumentInfo} info 
+         */
+        const addArgumentField = async function (info){
+            embed.addFields({
+                "name": `${info.name} (${info.type})`,
+                "value": `${info.description}`
+            })
+        } 
+
+        console.log(info)
+
+        info.data.arguments.forEach(addArgumentField)
+
+        return embed
+    }
+
+    global.buildCommandInfoEmbed = buildCommandInfoEmbed
 }
