@@ -1,8 +1,2 @@
-/handlers
-/interactions
-/jsons
 /node_modules
-/index.jsons/LICENSE
-/package-lock.json
-/package.json
-/ReadMe.md
+/jsons/sensitive.json
