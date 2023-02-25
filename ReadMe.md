@@ -6,6 +6,16 @@ Please keep in mind that this template is still undergoing development, every re
 
 But please keep in mind that I plan on updating this regularly as I learn more [Discord.js](https://discord.js.org/#/) features.
 
+## Files
+
+### `../jsons/sensitive.json`
+The code expects there to be a json file at `../jsons/sensitive.json`, as per the `.gitignore`, this file isn't synced with the github, this is for security reasons.
+The JSON should be added manually, the file contents should look something like:
+```json
+{
+    "token": ""
+}
+```
 
 # Template currently includes:
 * Interaction Handler
