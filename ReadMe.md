@@ -2,7 +2,7 @@
 
 Hello! Thank you for choosing my discord bot template!
 
-Please keep in mind that this template is still undergoing development, every release will be completely stable.
+Please keep in mind that this template is still undergoing development, every release will *usually* be completely stable.
 But please keep in mind that I plan on updating this regularly as I learn more discord.js features.
 
 ## Template currently includes:
