@@ -44,7 +44,6 @@ module.exports = async (client, authorized) => {
                         let command = commandData[interaction.commandName]
 
                         command.data.authCheck(interaction, client).then(({authorized,exactAuths}) => {
-                            console.log(authorized)
                             if (authorized >= 1) {
                                 command.command(interaction, client, authorized, exactAuths).catch((err) => {
                                     console.error(err)
@@ -144,19 +143,15 @@ module.exports = async (client, authorized) => {
                             ephemeral: true
                         })
                         let buttonData = require("../interactions/button.js")
-                        console.log(buttonData)
 
                         let interactionIdSplit = interaction.customId.split("/")
-                        console.log(interactionIdSplit)
 
                         let button = buttonData[interactionIdSplit[1]]
 
-                        console.log(button)
 
                         button.authCheck(interaction, client).then(({authorized,exactAuths}) => {
                             if (authorized >= 1) {
                                 interactionIdSplit.forEach((value, index) => {
-                                    console.log(value, index)
                                     if (index > 1) {
                                         button = button.subButtons[value]
                                     }
@@ -193,19 +188,15 @@ module.exports = async (client, authorized) => {
                             ephemeral: true
                         })
                         let menuData = require("../interactions/string-menu.js")
-                        console.log(menuData)
 
                         let interactionIdSplit = interaction.customId.split("/")
-                        console.log(interactionIdSplit)
 
                         let menu = menuData[interactionIdSplit[1]]
 
-                        console.log(menu)
 
                         menu.authCheck(interaction, client).then(({authorized,exactAuths}) => {
                             if (authorized >= 1) {
                                 interactionIdSplit.forEach((value, index) => {
-                                    console.log(value, index)
                                     if (index > 1) {
                                         menu = menu.subMenus[value]
                                     }
@@ -242,19 +233,15 @@ module.exports = async (client, authorized) => {
                             ephemeral: true
                         })
                         let menuData = require("../interactions/role-menu.js")
-                        console.log(menuData)
 
                         let interactionIdSplit = interaction.customId.split("/")
-                        console.log(interactionIdSplit)
 
                         let menu = menuData[interactionIdSplit[1]]
 
-                        console.log(menu)
 
                         menu.authCheck(interaction, client).then(({authorized,exactAuths}) => {
                             if (authorized >= 1) {
                                 interactionIdSplit.forEach((value, index) => {
-                                    console.log(value, index)
                                     if (index > 1) {
                                         menu = menu.subMenus[value]
                                     }
@@ -291,19 +278,15 @@ module.exports = async (client, authorized) => {
                             ephemeral: true
                         })
                         let menuData = require("../interactions/channel-menu.js")
-                        console.log(menuData)
 
                         let interactionIdSplit = interaction.customId.split("/")
-                        console.log(interactionIdSplit)
 
                         let menu = menuData[interactionIdSplit[1]]
 
-                        console.log(menu)
 
                         menu.authCheck(interaction, client).then(({authorized,exactAuths}) => {
                             if (authorized >= 1) {
                                 interactionIdSplit.forEach((value, index) => {
-                                    console.log(value, index)
                                     if (index > 1) {
                                         menu = menu.subMenus[value]
                                     }
@@ -340,19 +323,15 @@ module.exports = async (client, authorized) => {
                             ephemeral: true
                         })
                         let menuData = require("../interactions/user-menu.js")
-                        console.log(menuData)
 
                         let interactionIdSplit = interaction.customId.split("/")
-                        console.log(interactionIdSplit)
 
                         let menu = menuData[interactionIdSplit[1]]
 
-                        console.log(menu)
 
                         menu.authCheck(interaction, client).then(({authorized,exactAuths}) => {
                             if (authorized >= 1) {
                                 interactionIdSplit.forEach((value, index) => {
-                                    console.log(value, index)
                                     if (index > 1) {
                                         menu = menu.subMenus[value]
                                     }

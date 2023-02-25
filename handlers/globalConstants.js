@@ -329,8 +329,6 @@ module.exports = async (client) => {
 
         Object.entries(infos).forEach((value, index) => {
             let page = Math.floor(index / 25)
-            console.log(page)
-            console.log(value)
             if (pages[page]) {
                 pages[page].push({
                     value: value[1].description,
@@ -371,8 +369,6 @@ module.exports = async (client) => {
                 "value": `${info.description}`
             })
         } 
-
-        console.log(info)
 
         info.data.arguments.forEach(addArgumentField)
 
