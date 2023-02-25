@@ -67,10 +67,30 @@ const buttons = {
                         .setDisabled(false)
                         .setStyle(ButtonStyle.Primary)
                     ActionRow.setComponents([LeftArrow, Number, RightArrow])
+
+                    let ActionRow2 = new ActionRowBuilder()
+                    let SelectMenu = new SelectMenuBuilder()
+                        .setPlaceholder("Get command details")
+                        .setCustomId('ssm/cmd')
+    
+                    let builtOptions = []
+    
+                    pages[page-2].forEach(element => {
+                        builtOptions.push(
+                            {
+                                "label": `${element.name}`,
+                                "value": `${element.name}`
+                            }
+                        )
+                    });
+    
+                    SelectMenu.setOptions(builtOptions)
+
+                    ActionRow2.setComponents([SelectMenu])
                     interaction.update({
                         content: `Command ran into no errors`,
                         embeds: [new EmbedBuilder().setTitle("Commands").setFields(pages[page-2])],
-                        components: [ActionRow],
+                        components: [ActionRow, ActionRow2],
                         ephemeral: true
                     })
                 }
@@ -115,10 +135,30 @@ const buttons = {
                         .setDisabled((pages[page] !== null && pages[page] !== "undefined"))
                         .setStyle(ButtonStyle.Primary)
                     ActionRow.setComponents([LeftArrow, Number, RightArrow])
+
+                    let ActionRow2 = new ActionRowBuilder()
+                    let SelectMenu = new SelectMenuBuilder()
+                        .setPlaceholder("Get command details")
+                        .setCustomId('ssm/cmd')
+    
+                    let builtOptions = []
+    
+                    pages[page].forEach(element => {
+                        builtOptions.push(
+                            {
+                                "label": `${element.name}`,
+                                "value": `${element.name}`
+                            }
+                        )
+                    });
+    
+                    SelectMenu.setOptions(builtOptions)
+
+                    ActionRow2.setComponents([SelectMenu])
                     interaction.update({
                         content: `Command ran into no errors`,
                         embeds: [new EmbedBuilder().setTitle("Commands").setFields(pages[page])],
-                        components: [ActionRow],
+                        components: [ActionRow,ActionRow2],
                         ephemeral: true
                     })
                 }

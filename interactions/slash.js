@@ -142,7 +142,8 @@ const commands = {
                 let embed = await buildCommandInfoEmbed(commandData)
 
                 interaction.reply({
-                    embeds: [embed]
+                    embeds: [embed],
+                    ephemeral: true
                 })
             } else {
                 const returned = await getCommandInfos([])
@@ -164,10 +165,31 @@ const commands = {
                     .setDisabled((pages.length <= 1))
                     .setStyle(ButtonStyle.Primary)
                 ActionRow.setComponents([LeftArrow, Number, RightArrow])
+
+                let ActionRow2 = new ActionRowBuilder()
+                let SelectMenu = new SelectMenuBuilder()
+                    .setPlaceholder("Get command details")
+                    .setCustomId('ssm/cmd')
+
+                let builtOptions = []
+
+                pages[0].forEach(element => {
+                    builtOptions.push(
+                        {
+                            "label": `${element.name}`,
+                            "value": `${element.name}`
+                        }
+                    )
+                });
+
+                SelectMenu.setOptions(builtOptions)
+
+                ActionRow2.setComponents([SelectMenu])
+
                 interaction.reply({
                     content: `Command ran into no errors`,
                     embeds: [new EmbedBuilder().setTitle("Commands").setFields(pages[0])],
-                    components: [ActionRow],
+                    components: [ActionRow, ActionRow2],
                     ephemeral: true
                 })
             }
